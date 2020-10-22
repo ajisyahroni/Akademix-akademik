@@ -1,53 +1,107 @@
 <template>
   <div>
-    <v-simple-table>
-      <template v-slot:default>
-        <!-- head -->
-        <thead>
-          <tr>
-            <th>Jam</th>
-            <th v-for="{ name, id } in days" :key="id" v-text="name"></th>
-          </tr>
-        </thead>
+    <v-card>
+      <v-simple-table>
+        <template v-slot:default>
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>Jam</th>
+              <th v-for="{ name, id } in days" :key="id" v-text="name"></th>
+            </tr>
+          </thead>
 
-        <!-- body -->
-        <tbody>
-          <!-- looping for template -->
+          <!-- body -->
+          <tbody>
+            <!-- looping for template -->
 
-          <tr v-for="(row, rowId) in template_jadwals" :key="rowId">
-            <td>{{ row.start_time }} - {{ row.end_time }}</td>
+            <tr v-for="(row, rowId) in template_jadwals" :key="rowId">
+              <td>{{ row.start_time }} - {{ row.end_time }}</td>
 
-            <td v-for="(day, colId) in days" :key="colId">
-              <!-- jika suda -->
-              <v-chip
-                :color="getRandomColor()"
-                text-color="white"
-                link
-                @click:close="removeGuruMapel(rowId, colId)"
-                close
-                v-if="temporary_jadwals[rowId][colId].guru_name != null"
-              >
-                <strong
-                  >{{ temporary_jadwals[rowId][colId].guru_name }}
-                </strong>
-                <span> - {{ temporary_jadwals[rowId][colId].mapel_name }}</span>
-              </v-chip>
+              <td v-for="(day, colId) in days" :key="colId">
+                <!-- jika suda -->
+                <v-menu
+                  v-if="temporary_jadwals[rowId][colId].guru_name != null"
+                  bottom
+                  right
+                  transition="scale-transition"
+                  origin="top left"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-chip
+                      v-on="on"
+                      :color="getRandomColor()"
+                      text-color="white"
+                      link
+                      @click:close="removeGuruMapel(rowId, colId)"
+                      close
+                    >
+                      <strong
+                        >{{ temporary_jadwals[rowId][colId].guru_name }}
+                      </strong>
+                      <span>
+                        - {{ temporary_jadwals[rowId][colId].mapel_name }}</span
+                      >
+                    </v-chip>
+                  </template>
+                  <v-card width="300">
+                    <v-list dark>
+                      <v-list-item>
+                        <v-list-item-avatar>
+                          <v-img
+                            src="https://cdn.vuetifyjs.com/images/john.png"
+                          ></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title>John Leider</v-list-item-title>
+                          <v-list-item-subtitle
+                            >john@vuetifyjs.com</v-list-item-subtitle
+                          >
+                        </v-list-item-content>
+                        <v-list-item-action>
+                          <v-btn icon @click="menu = false">
+                            <v-icon>close</v-icon>
+                          </v-btn>
+                        </v-list-item-action>
+                      </v-list-item>
+                    </v-list>
+                    <v-list>
+                      <v-list-item-content>
+                        <v-list-item-title>Kimia</v-list-item-title>
+                      </v-list-item-content>
+                      <v-chip
+                        v-for="(kelas, indexKelas) in ['XI', 'XII', 'XII']"
+                        :key="indexKelas"
+                        class="mx-1"
+                        x-small
+                        color="primary"
+                        >{{ kelas }}</v-chip
+                      >
+                    </v-list>
+                  </v-card>
+                </v-menu>
 
-              <!-- jika belum ada guru -->
+                <!-- jika belum ada guru -->
 
-              <v-btn v-else icon small @click="showAddGuruMapel(rowId, colId)">
-                <draggable>
-                  <v-icon>add_circle_outline</v-icon>
-                </draggable>
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+                <v-btn
+                  v-else
+                  icon
+                  small
+                  @click="showAddGuruMapel(rowId, colId)"
+                >
+                  <draggable>
+                    <v-icon>add_circle_outline</v-icon>
+                  </draggable>
+                </v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </v-card>
 
     <!-- navigation drawer -->
-    <v-navigation-drawer v-model="v_navigation_drawer" absolute right app>
+    <v-navigation-drawer v-model="v_navigation_drawer" right app>
       <!-- header -->
       <div>
         <v-list-item v-if="has_selected_mapel">

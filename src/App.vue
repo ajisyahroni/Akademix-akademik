@@ -1,18 +1,37 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-main>
       <v-container>
-        <h1>component creation</h1>
-        <hr />
-        <CardSchedule />
+        <v-row justify="space-between">
+          <v-col>
+            <h1>component creation</h1>
+          </v-col>
+          <v-col>
+            <span>wanna dark fusion</span>
+            <v-switch v-model="isDark"></v-switch>
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
+        <div class="my-5">
+          <h3>Card Jadwal</h3>
+          <v-timeline align-top dense>
+            <v-timeline-item color="teal" small>
+              <h4>2018-2019</h4>
+              <v-row>
+                <v-col cols="12" sm="6"><CardSchedule /></v-col>
+                <v-col cols="12" sm="6"><CardSchedule /></v-col>
+              </v-row>
+            </v-timeline-item>
+          </v-timeline>
+        </div>
 
         <h3>Table</h3>
-        <!-- <TableSchedule /> -->
+        <TableSchedule />
 
-        <h5>Try draggable</h5>
+        <!-- <h5>Try draggable</h5> -->
         <!-- <Draggable/> -->
         <h3>Card guru</h3>
-        <CardGuru/>
+        <CardGuru />
       </v-container>
     </v-main>
   </v-app>
@@ -28,16 +47,29 @@ import TableSchedule from "./components/Schedule/Table";
 import Draggable from "./components/debug/Dragable";
 export default {
   name: "App",
+  methods: {
+    changeTheme() {
+      this.$vuetify.theme.dark = this.isDark;
+    },
+  },
+
+  mounted() {
+    this.changeTheme();
+  },
 
   components: {
     Draggable,
     CardSchedule,
     TableSchedule,
-    CardGuru
+    CardGuru,
   },
-
+  watch: {
+    isDark(val) {
+      this.$vuetify.theme.dark = val;
+    },
+  },
   data: () => ({
-    //
+    isDark: false,
   }),
 };
 </script>

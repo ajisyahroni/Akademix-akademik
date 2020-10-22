@@ -1,12 +1,12 @@
 <template>
-  <v-card elevation="0" >
+  <v-card elevation="0">
     <div class="d-flex justify-space-between main-card">
       <div class="bg-svg ma-0">
         <v-card-title class="ma-4">
-          <h4>Semester 1</h4>
+          Semester 1
         </v-card-title>
       </div>
-      <div class="rounded-bg-right pl-4" >
+      <div class="rounded-bg-right pl-4">
         <v-btn color="white" icon>
           <v-icon>more_vert</v-icon>
         </v-btn>
@@ -25,14 +25,12 @@ export default {};
   background-size: contain;
 }
 .main-card {
-  background-color: white;
-  color: white;
   -webkit-box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.23);
   box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.23);
 }
 
 .main-card > .rounded-bg-right {
-   /* flex-grow: 0.02; */
+  /* flex-grow: 0.02; */
   /* border-top-right-radius: 1%; */
   background-color: #ff9e59;
   clip-path: circle(50% at 90% 5%);

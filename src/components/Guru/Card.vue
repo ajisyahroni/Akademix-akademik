@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="0">
-    <v-row justify="space-between" class="main-card">
-      <div class="d-flex justify-start flex-nowrap">
+    <div class="main-card d-flex justify-space-between">
+      <div class="d-flex justify-start">
         <!-- avatars -->
         <div class="rounded-bg-left">
           <div style="position: relative">
@@ -16,22 +16,26 @@
         </div>
 
         <!-- name and nik -->
-        <div class="d-flex align-center ml-3">
-          <div>
-            <h1
-              class="text-h4 text-lg-h4 text-md-h6 text-sm-h6 text-xs-h6 grey--text text--darken-4"
-            >
-              Aji Syahroni S.Pd
-            </h1>
-            <p class="grey--text text--darken-2 mt-1">NIK 19207077</p>
-          </div>
+        <div class="d-flex align-center">
+          
+            <div>
+              <v-card-title>
+                Aji Syahroni S.Pd
+              </v-card-title>
+              <v-card-subtitle>NIK 19207077</v-card-subtitle>
+              <!-- <h1
+                class="text-h4 text-lg-h4 text-md-h6 text-sm-h6 text-xs-h6 grey--text text--darken-4"
+              > -->
+              <!-- <p class="grey--text text--darken-2 mt-1">NIK 19207077</p> -->
+            </div>
+          
         </div>
         <!-- end name and link -->
       </div>
 
       <!-- more vert -->
       <div class="rounded-bg-right pl-4">
-        <v-menu bottom origin="center center" transition="scale-transition">
+        <v-menu bottom origin="top center" transition="scale-transition">
           <!-- activator -->
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" icon class="ml-5" color="white">
@@ -54,7 +58,7 @@
           <!-- end list inside  -->
         </v-menu>
       </div>
-    </v-row>
+    </div>
   </v-card>
 </template>
 
@@ -72,8 +76,6 @@ export default {};
   transform: rotate(20deg);
 }
 .main-card {
-  background-color: white;
-  color: white;
   -webkit-box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.23);
   box-shadow: 0px 0px 11px -1px rgba(0, 0, 0, 0.23);
 }
