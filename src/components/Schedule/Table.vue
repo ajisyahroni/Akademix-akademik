@@ -13,6 +13,7 @@
         <!-- body -->
         <tbody>
           <!-- looping for template -->
+
           <tr v-for="(row, rowId) in template_jadwals" :key="rowId">
             <td>{{ row.start_time }} - {{ row.end_time }}</td>
 
@@ -26,13 +27,18 @@
                 close
                 v-if="temporary_jadwals[rowId][colId].guru_name != null"
               >
-                <strong>{{ temporary_jadwals[rowId][colId].guru_name }}  </strong>
+                <strong
+                  >{{ temporary_jadwals[rowId][colId].guru_name }}
+                </strong>
                 <span> - {{ temporary_jadwals[rowId][colId].mapel_name }}</span>
               </v-chip>
 
               <!-- jika belum ada guru -->
+
               <v-btn v-else icon small @click="showAddGuruMapel(rowId, colId)">
-                <v-icon>add_circle_outline</v-icon>
+                <draggable>
+                  <v-icon>add_circle_outline</v-icon>
+                </draggable>
               </v-btn>
             </td>
           </tr>
@@ -110,6 +116,9 @@
 </template>
 
 <script>
+// depdcies
+import draggable from "vuedraggable";
+
 // classes
 import Guru from "@/classes/guru";
 import Mapel from "@/classes/mapel";
@@ -120,6 +129,9 @@ import Schedule from "@/classes/scheduleValue";
 import getRandomColor from "@/utils/arrayOfColor";
 
 export default {
+  components: {
+    draggable,
+  },
   methods: {
     //   ui logic
     showNavigationDrawer() {
