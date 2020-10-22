@@ -30,7 +30,7 @@
       </div>
 
       <!-- more vert -->
-      <div class="rounded-bg-right">
+      <div class="rounded-bg-right pl-4">
         <v-menu bottom origin="center center" transition="scale-transition">
           <!-- activator -->
           <template v-slot:activator="{ on, attrs }">
@@ -84,7 +84,7 @@ export default {};
 }
 
 .main-card > .rounded-bg-right {
-  flex-grow: 0.02;
+  /* flex-grow: 0.02; */
   /* border-top-right-radius: 1%; */
   background-color: #ff9e59;
   clip-path: circle(50% at 90% 5%);
